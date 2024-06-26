@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Pomodoro</h1>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h2 id="timer">25:00</h2>
+                        <button id="startBtn" class="btn btn-success mt-3">Start</button>
+                        <button id="resetBtn" class="btn btn-light mt-3">Reset</button>
+                        <button id="stopBtn" class="btn btn-danger mt-3">Stop</button>
+                        <div class="mt-3">
+                            <p>Completed Pomodoros: <span id="pomodoroCounter">0</span></p>
+                            <div class="progress" role="progressbar" aria-label="Danger example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-danger" style="width: 100%"></div>                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        let time = 10; // 25 minutes in seconds
+        let pomodoroCount = 0;
+
+        const timerElement = document.getElementById('timer');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const pomodoroCounter = document.getElementById('pomodoroCounter');
+        const progressBar = document.getElementById('progressBar');
+
+        let intervalId;
+
+        function startTimer() {
+            startBtn.disabled = true;
+            intervalId = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(time / 60);
+            const seconds = time % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            time--;
+
+            if (time < 0) {
+                resetTimer();
+                alert('Timer has ended!');
+                pomodoroCount++;
+                pomodoroCounter.textContent = pomodoroCount;
+                updateProgressBar();
+            }
+        }
+
+        function stopTimer() {
+            startBtn.disabled = false;
+            clearInterval(intervalId);
+        }
+
+        function resetTimer() {
+            stopTimer();
+            time = 10;
+            updateTimer();
+        }
+
+        function updateProgressBar() {
+            const progress = (pomodoroCount % 4) * 25;
+            progressBar.style.width = `${progress}%`;
+            progressBar.setAttribute('aria-valuenow', progress);
+        }
+
+        // Add event listeners to the start, stop, and reset buttons
+        startBtn.addEventListener('click', startTimer);
+        stopBtn.addEventListener('click', stopTimer);
+        resetBtn.addEventListener('click', resetTimer);
+    </script>
+</body>
+</html>
