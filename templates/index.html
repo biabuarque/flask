@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Website</title>
+    <title>When2Meet</title>
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Horizontally center */
+            align-items: center; /* Vertically center */
+            height: 100vh; /* Full viewport height */
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Website</h1>
-    <p>This is the homepage of my website.</p>
-    
-    <h2>Navigation</h2>
-    <ul>
-        <li><a href="about.html" class="btn btn-primary">About</a></li>
-        <li><a href="contact.html" class="btn btn-secondary">Contact</a></li>
+    <div class="container">
+    <h1 class="text-center mt-5"> 
+        When2Meet
+        <small class="text-body-secondary">Find the perfect time.</small>
+    </h1>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <br><br>
+        <a href="/login" type="button" class="btn btn-outline-success">Login</a>
+        <a href="/signup" type="button" class="btn btn-outline-success">Create my Account</a>
+      </div>
     </ul>
-    </ul>
+    </div>
 </body>
 </html>
