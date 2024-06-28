@@ -22,5 +22,9 @@ def login():
 def forgotmypassword():
     return render_template('forgotmypassword.html')
 
+@app.route('/agenda')
+def agenda():
+    return render_template('agenda.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
