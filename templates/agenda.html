@@ -9,7 +9,7 @@
             flex-direction: column;
             justify-content: center; /* Horizontally center */
             align-items: left; /* Vertically center */
-            height: 100vh; /* Full viewport height */
+            height: 200vh; /* Full viewport height */
         }
         .selected {
             background-color: darkred !important;
@@ -17,14 +17,15 @@
     </style>
 </head>
 <body>
+    <br><br>
     <div class="container">
-        <h1 class="display-3">Define your agenda</h1>
+        <h1 class="display-4">Define your agenda</h1>
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    When are you 
-                    <strong style="color: darkred;"> busy</strong>?
+                    When are you&nbsp; 
+                    <span style="color: darkred;">busy</span>?
                 </button>
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
@@ -32,14 +33,15 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                                <th>Saturday</th>
-                                <th>Sunday</th>
+                                <th style="width: 12.5%"></th>
+                                <th style="width: 12.5%">Monday</th>
+                                <th style="width: 12.5%">Tuesday</th>
+                                <th style="width: 12.5%">Wednesday</th>
+                                <th style="width: 12.5%">Thursday</th>
+                                <th style="width: 12.5%">Friday</th>
+                                <th style="width: 12.5%">Saturday</th>
+                                <th style="width: 12.5%">Sunday</th>
+                            </tr>
                             </tr>
                         </thead>
                         <tbody>
@@ -239,7 +241,12 @@
               </h2>
               <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    <div class="row">
+                        <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control form-control-lg" id="colFormLabelLg">
+                        </div>
+                      </div>
                 </div>
               </div>
             </div>
@@ -251,6 +258,15 @@
         $(document).ready(function() {
             $('td').click(function() {
                 $(this).toggleClass('selected');
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.accordion-button').click(function() {
+                $(this).toggleClass('collapsed');
+                var target = $(this).attr('data-bs-target');
+                $(target).toggleClass('show');
             });
         });
     </script>
